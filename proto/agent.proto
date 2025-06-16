@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+//import "common.proto";
+
+package TB;
+
+// socket type: replier
+message AgentTask
+{
+  uint64 rid = 1;              // request id (sequence number)
+  oneof method
+  {
+    // agent control
+    ResetAgentAccount reset_agent_account = 2;
+    ResetAgent reset_agent = 3;
+    // trade control
+    GetBalance get_balance = 4;
+    ResetTotalRiskLimits reset_total_risk_limits = 5;
+  }
+}
+
+// agent control
+
+message ResetAgentAccount
+{
+  string account = 1;           // {cefi ex.name, acc.id} | defi {chain addr., defi wallet addr.}
+  double trade_limit = 2;       // tradable part of balance
+  double drawdown_limit = 3;    // maximum drowdown for the agent
+  uint32 loss_seq_limit = 4;    // maximum number of sequential losses
+}
+
+message ResetAgent
+{
+  uint32 online = 1;            // 0 = off, 1 = on
+}
+
+// trade control
+
+message GetBalance
+{
+  string provider = 1;          // crypto dex | crypto cex | broker
+  optional string channel = 2;  // crypto chain
+  uint32 account = 3;           // wallet num from user settings
+}
+
+message ResetTotalRiskLimits
+{
+  double total_drawdown_limit = 4;    // maximum drowdown for sum of all accounts
+  uint32 total_loss_seq_limit = 5;    // maximum sum number of sequential losses for all agents
+}

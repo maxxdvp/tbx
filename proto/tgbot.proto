@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+//import "common.proto";
+
+package TB;
+
+// socket type: subscriber
+message TGBotMsg
+{
+  uint64 rid = 1; // request id (sequence number)
+  oneof payload
+  {
+    TxNotice tx_notice = 2;
+    AgentError agent_error = 3;
+  }
+}
+
+message TxNotice
+{
+  uint32 provider = 1;
+  uint32 market = 2;
+  string ticker = 3;
+  uint32 op_side = 4;
+  uint32 op_type = 5;
+  string value = 6;
+  string value_base = 7;
+  string price = 8;
+  string fee = 9;
+  string pnl = 10;
+  string status = 11;
+  uint64 ts_ms = 12;
+}
+
+message AgentError
+{
+  uint64 ts_ms = 1;
+  uint32 level = 2;
+  string source = 3;
+  string message = 4;
+  string details = 5;
+}

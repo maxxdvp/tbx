@@ -1,0 +1,91 @@
+keyring_service: TB-ByBit-Demo
+test_mode: 0
+demo_acc: 1
+
+max_drawdown_limit: 0.5               # drawdown level, on which the agent will be stopped
+loss_series_len_limit: 50             # sequential loss series length, on which the agent will be stopped
+limits_period_h: 6                    # time period to calculate the two limits, hours
+
+strategy:
+
+  provider: ByBit
+  market: future
+  asset: BTCUSDT
+
+  bidirectional_trading: 1            # 0 = trade with longs only, 1 = trade with longs and shorts
+  order_lifetime_min: null            # order lifetime, minutes (none applicable if null)
+  trade_size_limit: 500               # maximum sum per 1 trade, in base asset (use whole balance if null)
+  position_size_limit: 5000           # maximum sum per 1 position, in base asset by open price (use whole balance if null)
+  max_order_open_slippage: null       # maximum relative slippage for order open price [0, 1) or null for auto
+
+  sl_pct: 0.01                        # maximum relative distance from the open price to the estimated SL for a trade
+  tp_pct: 0.05                        # estimated profit / risk (SL) for a trade
+  trailing_stop_profit_pct: 0.05      # profit level to activate trailing stop (do not activate if null)
+  trailing_stop_pct: 0.01             # active trailing stop distance to market price (applicable if trailing_stop_on_profit ≠ null)
+
+  signal_thr: 3                       # threshold for sub of analyzers' signals
+
+analyzers:
+
+  fractal_1:
+
+    asset: BTCUSDT                  # data for analysis
+    timeframe: 1                    # timeframe in minutes
+    frame_size: 8
+
+    smooth_period: 0                # effective if > 1
+    log_input: 0                    # use logarithmic OHLC
+    diff_input: 0                   # differentiate OHLCV
+    norm_input: 0                   # normalize all features
+
+    fractal_period: 5
+    fractal_tolerance: 0.0002169
+#    ma_slow_period: 50
+#    ma_medium_period: 29
+#    ma_fast_period: 7
+
+#    use_gpu: 0                      # use cuda
+#    use_mixed_precision: 0          # works with cpu and gpu/cuda
+#    random_seed: 777
+
+  fractal_3:
+
+    asset: BTCUSDT                  # data for analysis
+    timeframe: 3                    # timeframe in minutes
+    frame_size: 8
+
+    smooth_period: 0                # effective if > 1
+    log_input: 0                    # use logarithmic OHLC
+    diff_input: 0                   # differentiate OHLCV
+    norm_input: 0                   # normalize all features
+
+    fractal_period: 3
+    fractal_tolerance: 0.0006751
+#    ma_slow_period: 50
+#    ma_medium_period: 29
+#    ma_fast_period: 7
+
+#    use_gpu: 0                      # use cuda
+#    use_mixed_precision: 0          # works with cpu and gpu/cuda
+#    random_seed: 777
+
+  fractal_5:
+
+    asset: BTCUSDT                  # data for analysis
+    timeframe: 5                    # timeframe in minutes
+    frame_size: 8
+
+    smooth_period: 0                # effective if > 1
+    log_input: 0                    # use logarithmic OHLC
+    diff_input: 0                   # differentiate OHLCV
+    norm_input: 0                   # normalize all features
+
+    fractal_period: 3
+    fractal_tolerance: 0.0021941
+#    ma_slow_period: 50
+#    ma_medium_period: 29
+#    ma_fast_period: 7
+
+#    use_gpu: 0                      # use cuda
+#    use_mixed_precision: 0          # works with cpu and gpu/cuda
+#    random_seed: 777

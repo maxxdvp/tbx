@@ -1,0 +1,2 @@
+keyring_service: TB-TGBot
+debug_level: INFO           # CRITICAL | ERROR | WARNING | INFO | DEBUG | NOTSET

@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package TB;
+
+// indexes from connectors.enums.Providers
+message ProviderMarket
+{
+  uint32 provider = 1;        // crypto dex | crypto cex | broker
+  optional uint32 market = 2; // crypto chain | ex/broker section
+}
+
+message Asset
+{
+  string ticker = 1;            // of the asset
+  string base_ticker = 2;       // in which the asset nominated
+//  uint32 type = 3;            // indexes from connectors.enums.AssetType
+}
+
+message OHLCV
+{
+  double open = 1;
+  double high = 2;
+  double low = 3;
+  double close = 4;
+  double volume = 5;
+}
+
+enum TxOrigin
+{
+  TX_DIRECT = 0;
+  TX_LIMIT = 1;
+}
+
+// message response
+
+enum TaskState {
+    TASK_IN_PROGRESS = 0;       // The result has not been sent yet
+    TASK_DONE = 1;              // The result has been sent
+    TASK_DONE_PARTIALLY = 2;    // The result has been sent partially, await final package
+    TASK_FAILED = 3;            // Error occurred, see err_src, err and err_msg for description
+}
+
+enum ErrorSource {
+    ERR_SRC_UNKNOWN = 0;
+    ERR_SRC_TRADER = 1;
+    ERR_SRC_GATEWAY = 2;
+    ERR_SRC_TGBOT = 3;
+}
+
+enum Error {
+    ERR_UNKNOWN = 0;
+    ERR_SERVICE_OFFLINE = 1;
+}
+
+// socket type: requestor
+message TaskResult {
+    uint64 rid = 1;
+    TaskState state = 2;
+    ErrorSource err_src = 3;
+    Error err = 4;
+    string err_msg = 5;
+}

@@ -1,0 +1,11 @@
+__pycache__/
+.idea/
+/_arch/
+
+*.bkp
+*.log
+*.sqlite
+*.sqlite-journal
+
+/tgbot/users.txt
+/tgbot/subscribers.json
