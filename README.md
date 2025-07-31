@@ -2,6 +2,12 @@
 
 A modular Python framework for reliable algotraiding bots.
 
+Detailed description is in the articles:
+[1. Requirements and Workflow](https://wire.insiderfinance.io/engineering-an-algotrading-framework-1-requirements-and-workflow-32877183304a)
+[2. Analyzer and Strategy](https://wire.insiderfinance.io/engineering-of-algotrading-framework-2-analyzer-and-strategy-64a353515060)
+[3. Input Data Processing](https://wire.insiderfinance.io/engineering-of-algotrading-framework-3-input-data-processing-fd3d36b5742b)
+[4. Agent Assembly](https://wire.insiderfinance.io/engineering-an-algotrading-framework-4-agent-assembly-b10cf23defe3)
+
 ### What in the repository ###
 
 As for now, the trading system consists of trading agent(s) and telegram bot.
